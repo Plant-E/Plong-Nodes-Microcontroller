@@ -15,6 +15,8 @@ public:
     int middleX();
     int middleY();
 
+    void visualiseBall(int int_x, int pos_y);
+
 };
 
 #endif

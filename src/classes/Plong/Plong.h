@@ -16,6 +16,7 @@ public:
     Plong(Display display, Ball ball);
     void iterate();
     void start();
+    void visualise();
 
     void consoleVisualisation();
 

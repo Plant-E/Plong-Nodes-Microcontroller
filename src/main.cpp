@@ -4,21 +4,23 @@
 #include "classes/Plong/Plong.h"
 
 Plong plong = Plong(
-  Display(30, 10),
-  Ball(150)
+  Display(10, 1),
+  Ball(25)
 );
+
+
+
+
 
 void setup() {
     Serial.begin(9600);
     randomSeed(analogRead(A0));
 
-    //Based on user input
     plong.start();
+    plong.ball.setDirection(0);
 }
 
 void loop() {
     plong.iterate();
     plong.consoleVisualisation();
-
-    delay(200);
 }

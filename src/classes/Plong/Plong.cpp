@@ -23,10 +23,15 @@ void Plong::iterate(){
 
     ball.move();
     ball.bounce();
+
+    visualise();
 }
 
+void Plong::visualise(){
+    
+    display.visualiseBall(ball.pos_x, ball.pos_y);
 
-
+}
 
 void Plong::consoleVisualisation(){
     Serial.print("X: ");
