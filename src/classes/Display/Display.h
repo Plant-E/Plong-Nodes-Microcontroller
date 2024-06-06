@@ -6,11 +6,14 @@ public:
     int res_x;
     int res_y;
 
+    int visualisation_distance;
+    int max_brightness;
+
     int full_res_x;
     int full_res_y;
 
     Display();
-    Display(int x, int y);
+    Display(int x, int y, int visualisation_distance, int max_brightness);
 
     int middleX();
     int middleY();

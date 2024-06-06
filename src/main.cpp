@@ -4,8 +4,8 @@
 #include "classes/Plong/Plong.h"
 
 Plong plong = Plong(
-  Display(10, 1),
-  Ball(25)
+  Display(10, 1, 100, 50),
+  Ball(5)
 );
 
 
@@ -22,5 +22,6 @@ void setup() {
 
 void loop() {
     plong.iterate();
-    plong.consoleVisualisation();
+    delay(25);
+    // plong.consoleVisualisation();
 }

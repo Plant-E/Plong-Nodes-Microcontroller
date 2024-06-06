@@ -9,13 +9,20 @@ CRGB leds[NUM_LEDS];
 Display::Display() {
     res_x = 0;
     res_y = 0;
+
+    visualisation_distance = 0;
+    max_brightness = 0;
 }
-Display::Display(int x, int y) {
+Display::Display(int x, int y, int v_distance, int brightness) {
     res_x = x;
     res_y = y;
 
     full_res_x = x * 100;
     full_res_y = y * 100;
+
+    visualisation_distance = v_distance;
+    max_brightness = brightness;
+
 
     FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
 }
@@ -31,22 +38,14 @@ void Display::visualiseBall(int pos_x, int pos_y){
     for(int y = 0; y < res_y; y++){
         for(int x = 0; x < res_x; x++){
             int led = y * res_y + x;
-
-            Serial.print("LED: ");
-            Serial.print(led);
-            Serial.print(" Brightness: ");
-
-
             float distance = sqrt(pow((x * 100 + 50) - pos_x, 2) + pow((y * 100 + 50) - pos_y, 2));
 
-            if(distance > 250){
+            if(distance > visualisation_distance){
                 leds[led] = CRGB::Black;
-                Serial.println(0);
             }
             else{
-                float brightness = static_cast<int>(50 * (1 - (distance / 250)));
+                int brightness = static_cast<int>(max_brightness * (1 - (distance / visualisation_distance)));
                 leds[led] = CRGB(brightness, 0, 0);
-                Serial.println(brightness);
             }
 
             // Serial.print("Distance: LED(x");
