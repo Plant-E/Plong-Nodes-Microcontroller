@@ -37,7 +37,12 @@ int Display::middleY(){
 void Display::visualiseBall(int pos_x, int pos_y){
     for(int y = 0; y < res_y; y++){
         for(int x = 0; x < res_x; x++){
+            
             int led = y * res_y + x;
+            if(y % 2 == 1){
+                led = (y + 1) * res_y - x;
+            }
+
             float distance = sqrt(pow((x * 100 + 50) - pos_x, 2) + pow((y * 100 + 50) - pos_y, 2));
 
             if(distance > visualisation_distance){
