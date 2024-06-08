@@ -1,24 +1,14 @@
 #include "Display.h"
 #include <FastLED.h>
 
-#define NUM_LEDS 10
+#define NUM_LEDS 285
 #define DATA_PIN 18
 
 CRGB leds[NUM_LEDS];
 
-Display::Display() {
-    res_x = 0;
-    res_y = 0;
-
-    visualisation_distance = 0;
-    max_brightness = 0;
-}
 Display::Display(int x, int y, int v_distance, int brightness) {
     res_x = x;
     res_y = y;
-
-    full_res_x = x * 100;
-    full_res_y = y * 100;
 
     visualisation_distance = v_distance;
     max_brightness = brightness;
@@ -27,20 +17,29 @@ Display::Display(int x, int y, int v_distance, int brightness) {
     FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
 }
 
+int Display::fullResX(){
+    return res_x * 100;
+}
+int Display::fullResY(){
+    return res_y * 100;
+}
+
 int Display::middleX(){
-    return full_res_x / 2;
+    return fullResX() / 2;
 }
 int Display::middleY(){
-    return full_res_y / 2;
+    return fullResY() / 2;
 }
 
 void Display::visualiseBall(int pos_x, int pos_y){
     for(int y = 0; y < res_y; y++){
         for(int x = 0; x < res_x; x++){
             
-            int led = y * res_y + x;
-            if(y % 2 == 1){
-                led = (y + 1) * res_y - x;
+            int led;
+            if (y % 2 == 0) {
+                led = y * res_x + x;
+            } else {
+                led = y * res_x + (res_x - 1 - x);
             }
 
             float distance = sqrt(pow((x * 100 + 50) - pos_x, 2) + pow((y * 100 + 50) - pos_y, 2));
@@ -68,4 +67,21 @@ void Display::visualiseBall(int pos_x, int pos_y){
     }
 
     FastLED.show();
+}
+
+void Display::debug(){
+    Serial.print("X:");
+    Serial.print(res_x);
+    Serial.print(" , Y:");
+    Serial.println(res_y);
+
+    Serial.print("full_X:");
+    Serial.print(fullResX());
+    Serial.print(" , full_Y:");
+    Serial.println(fullResY());
+
+    Serial.print("middle_X:");
+    Serial.print(middleX());
+    Serial.print(" , middle_Y:");
+    Serial.println(middleY());
 }

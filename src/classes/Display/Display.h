@@ -9,16 +9,17 @@ public:
     int visualisation_distance;
     int max_brightness;
 
-    int full_res_x;
-    int full_res_y;
-
-    Display();
     Display(int x, int y, int visualisation_distance, int max_brightness);
+
+    int fullResX();
+    int fullResY();
 
     int middleX();
     int middleY();
 
     void visualiseBall(int int_x, int pos_y);
+
+    void debug();
 
 };
 
