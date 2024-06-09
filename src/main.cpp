@@ -16,7 +16,7 @@ void setup() {
 
 void loop() {
     plong.iterate();
-    // plong.display.debug();
+     plong.display.debug();
     // plong.consoleVisualisation();
     delay(20);
 }
