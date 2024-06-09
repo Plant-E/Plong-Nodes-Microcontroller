@@ -18,5 +18,5 @@ void loop() {
     plong.iterate();
     // plong.display.debug();
     // plong.consoleVisualisation();
-    delay(10);
+    delay(20);
 }
