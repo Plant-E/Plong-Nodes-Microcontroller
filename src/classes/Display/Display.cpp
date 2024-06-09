@@ -69,3 +69,13 @@ void Display::visualiseBall(int pos_x, int pos_y){
 
     FastLED.show();
 }
+
+void Display::Animation_Players()
+{
+
+}
+
+void Display::Animation_Score()
+{
+    
+}
