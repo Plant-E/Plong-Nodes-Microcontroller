@@ -10,9 +10,12 @@ public:
 
     bool game_state;
 
-    Display display;
-    Ball ball;
-    Plong(Display display, Ball ball);
+
+    Display& display;
+    Ball& ball;
+
+    Plong(Display& display, Ball& ball);
+    
     void iterate();
     void Booting();
     void Start();

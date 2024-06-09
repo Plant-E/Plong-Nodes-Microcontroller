@@ -3,30 +3,26 @@
 #include "classes/Ball/Ball.h"
 #include "classes/Plong/Plong.h"
 
+
 enum States{Start, Play, Game_Over,BootMode};
 States CurrentState = BootMode;
 
-Plong plong = Plong(
-  Display(10, 1, 100, 50),
-  Ball(5)
-);
-
-
-
-
+Display display(15, 19, 100, 50);
+Ball ball(20);
+Plong plong(display, ball);
 
 void setup() {
     Serial.begin(9600);
     randomSeed(analogRead(A0));
 
     plong.start();
-    plong.ball.setDirection(0);
 }
 
 void loop() {
     plong.iterate();
-    delay(25);
+     plong.display.debug();
     // plong.consoleVisualisation();
+
   switch(CurrentState)
   {
     case BootMode:
@@ -42,5 +38,6 @@ void loop() {
       Plong.Game_Over();
       break;
   }
+    delay(20);
 
 }

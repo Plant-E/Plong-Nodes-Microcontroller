@@ -1,12 +1,9 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include "../Display/Display.h"
-
 class Ball {
 public:
     
-    Display display;
 
     int speed;
     int direction;
@@ -14,16 +11,16 @@ public:
     int pos_x;
     int pos_y;
 
-    Ball();
     Ball(int speed);
 
     void move();
-    void bounce();
+    void bounce(int full_res_x, int full_res_y);
 
     void setPosition(int x, int y);
     void setDirection(int direction);
-    void setDisplay(Display display);
     void setStartingDirection();
+
+    void debug();
 
 };
 

@@ -1,9 +1,6 @@
 #include <Arduino.h>
 #include "Ball.h"
 
-Ball::Ball() {
-    speed = 10;
-}
 Ball::Ball(int set_speed) {
     speed = set_speed;
 }
@@ -17,10 +14,10 @@ void Ball::move(){
     pos_x += round(delta_x);
     pos_y += round(delta_y);
 }
-void Ball::bounce(){
-    if(pos_y >= display.full_res_y){ //Bottom
+void Ball::bounce(int full_res_x, int full_res_y){
+    if(pos_y >= full_res_y){ //Bottom
         direction = 360 - direction;
-        pos_y = display.full_res_y;
+        pos_y = full_res_y;
     }
     else if(pos_y <= 0){ //Top
         direction = 360 - direction;
@@ -32,23 +29,22 @@ void Ball::bounce(){
         if(direction < 0){ direction += 360; };
         pos_x = 0;
     }
-    else if(pos_x >= display.full_res_x){ // Right
+    else if(pos_x >= full_res_x){ // Right
         // TODO: Check for paddle
         direction = 180 - direction;
         if(direction < 0){  direction += 360; };
-        pos_x = display.full_res_x;
+        pos_x = full_res_x;
     }
 }
 
 void Ball::setPosition(int x, int y){
     pos_x = x;
     pos_y = y;
+
+    debug();
 }
 void Ball::setDirection(int set_direction){
     direction = set_direction;
-}
-void Ball::setDisplay(Display display_instance){
-    display = display_instance;
 }
 void Ball::setStartingDirection(){
     int player = random(2);
@@ -60,4 +56,11 @@ void Ball::setStartingDirection(){
         direction = random(135, 215);
     }
 
+}
+
+void Ball::debug(){
+    Serial.print("pos_x: ");
+    Serial.print(pos_x);
+    Serial.print(", pox_y:");
+    Serial.println(pos_y);
 }

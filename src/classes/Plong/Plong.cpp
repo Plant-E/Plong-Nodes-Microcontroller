@@ -1,19 +1,12 @@
 #include <Arduino.h>
 #include "Plong.h"
 
-Plong::Plong(Display display_instance, Ball ball_instance){
-
+Plong::Plong(Display& display_instance, Ball& ball_instance) : display(display_instance), ball(ball_instance){
     game_state = false;
-
-    display = display_instance;
-    ball = ball_instance;
-
-    ball.setDisplay(display);
 }
 
-void Plong::Start(){
-
-
+void Plong::Start()
+{
     ball.setPosition(display.middleX(), display.middleY());
     ball.setStartingDirection();
     //CurrentState = Play;  //Need to be added in main - overleg met PIOTR.
@@ -23,15 +16,13 @@ void Plong::iterate(){
     if(!game_state){ return; }
 
     ball.move();
-    ball.bounce();
+    ball.bounce(display.fullResX(), display.fullResY());
 
     visualise();
 }
 
 void Plong::visualise(){
-    
     display.visualiseBall(ball.pos_x, ball.pos_y);
-
 }
 
 void Plong::consoleVisualisation(){
