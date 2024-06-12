@@ -3,12 +3,11 @@
 #include "classes/Ball/Ball.h"
 #include "classes/Plong/Plong.h"
 
-
 enum States{Start, Play, Game_Over,BootMode};
 States CurrentState = BootMode;
 
-Display display(15, 19, 100, 50);
-Ball ball(20);
+Display display(10, 6, 90, 20); //x, y, visualization_distance, max_brightness
+Ball ball(2); // Speed
 Plong plong(display, ball);
 
 void setup() {
@@ -20,7 +19,6 @@ void setup() {
 
 void loop() {
     plong.iterate();
-     plong.display.debug();
     // plong.consoleVisualisation();
 
   switch(CurrentState)
