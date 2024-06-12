@@ -69,6 +69,17 @@ void Display::visualiseBall(int pos_x, int pos_y){
     FastLED.show();
 }
 
+
+void Display::Animation_Players()
+{
+
+}
+
+void Display::Animation_Score()
+{
+    
+}
+
 void Display::debug(){
     Serial.print("X:");
     Serial.print(res_x);
@@ -85,3 +96,4 @@ void Display::debug(){
     Serial.print(" , middle_Y:");
     Serial.println(middleY());
 }
+

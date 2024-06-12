@@ -18,6 +18,8 @@ public:
     int middleY();
 
     void visualiseBall(int int_x, int pos_y);
+    void Animation_Score();
+    void Animation_Players();
 
     void debug();
 

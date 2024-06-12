@@ -5,10 +5,11 @@ Plong::Plong(Display& display_instance, Ball& ball_instance) : display(display_i
     game_state = false;
 }
 
-void Plong::start(){
-    game_state = true;
+void Plong::Start()
+{
     ball.setPosition(display.middleX(), display.middleY());
     ball.setStartingDirection();
+    //CurrentState = Play;  //Need to be added in main - overleg met PIOTR.
 }
 
 void Plong::iterate(){
