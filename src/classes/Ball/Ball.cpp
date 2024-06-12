@@ -40,20 +40,28 @@ void Ball::bounce(int full_res_x, int full_res_y){
 void Ball::setPosition(int x, int y){
     pos_x = x;
     pos_y = y;
-
-    debug();
 }
 void Ball::setDirection(int set_direction){
     direction = set_direction;
 }
 void Ball::setStartingDirection(){
     int player = random(2);
+    int left_right = random(2);
+    int offset = random(15, 45);
 
     if(player == 0){
-        direction = random(-45, 45);
+        direction = 90;
     }
     else{
-        direction = random(135, 215);
+        direction = 270;
+    }
+
+    //To avoid the ball going vertically up or down
+    if(left_right == 0){
+        direction = direction - offset;
+    }
+    else{
+        direction = direction + offset;
     }
 
 }

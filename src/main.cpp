@@ -3,8 +3,8 @@
 #include "classes/Ball/Ball.h"
 #include "classes/Plong/Plong.h"
 
-Display display(15, 19, 100, 50);
-Ball ball(20);
+Display display(10, 6, 90, 20); //x, y, visualization_distance, max_brightness
+Ball ball(2); // Speed
 Plong plong(display, ball);
 
 void setup() {
@@ -16,7 +16,5 @@ void setup() {
 
 void loop() {
     plong.iterate();
-     plong.display.debug();
     // plong.consoleVisualisation();
-    delay(20);
 }
