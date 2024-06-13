@@ -8,7 +8,7 @@ Plong::Plong(Display& display_instance, Ball& ball_instance) : display(display_i
 void Plong::Start()
 {
 
-    ball.setPosition(display.middleX(), display.middleY());
+    // ball.setPosition(display.middleX(), display.middleY());
     // ball.setStartingDirection();
 
     display.Animation_Game_Over_Mode(1);
