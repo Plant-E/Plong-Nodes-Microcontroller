@@ -23,7 +23,14 @@ void Plong::iterate(){
     if(!game_state){ return; }
 
     ball.move();
-    ball.bounce(display.fullResX(), display.fullResY());
+    int paddle_scored = ball.bounce(display, paddle);
+
+    //0 = Bounced, 1 = P1 scored, 2 = p2 scored
+    if(paddle_scored){
+
+        //TODO: Implement game state & score
+        Start();
+    }
 
     visualise();
 }
