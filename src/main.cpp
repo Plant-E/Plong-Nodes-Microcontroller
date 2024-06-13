@@ -15,29 +15,26 @@ void setup() {
     Serial.begin(9600);
     randomSeed(analogRead(A0));
 
-    plong.start();
+    plong.Start();
 }
 
 void loop() {
-    plong.iterate();
-     plong.display.debug();
+    plong.Start();
+    // plong.display.debug();
     // plong.consoleVisualisation();
 
-  switch(CurrentState)
-  {
-    case BootMode:
-      Plong.Booting();
-      break;
-    case Start:
-      Plong.Start();
-      break;
-    case Play:
-      Plong.iterate();
-      break;
-    case Game_Over:
-      Plong.Game_Over();
-      break;
-  }
-    delay(20);
+  // switch(CurrentState)
+  // {
+  //   case BootMode:
+  //     Plong.Booting();
+  //     break;
+  //   case Start:
+  //     Plong.Start();
+  //     break;
+  //   case Play:
+  //     Plong.iterate();
+  //     break;
+  // }
+  //   delay(20);
 
 }

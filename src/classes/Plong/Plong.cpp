@@ -7,13 +7,15 @@ Plong::Plong(Display& display_instance, Ball& ball_instance) : display(display_i
 
 void Plong::Start()
 {
+
     ball.setPosition(display.middleX(), display.middleY());
-    ball.setStartingDirection();
+    // ball.setStartingDirection();
+
+    display.Animation_Game_Over_Mode(1);
     //CurrentState = Play;  //Need to be added in main - overleg met PIOTR.
 }
 
 void Plong::iterate(){
-    if(!game_state){ return; }
 
     ball.move();
     ball.bounce(display.fullResX(), display.fullResY());
