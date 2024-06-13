@@ -11,16 +11,17 @@ Plong::Plong(Display& display_instance, Ball& ball_instance, Paddle& paddle_inst
 
 void Plong::Start()
 {
+
+    display.Animation_Game_Over_Mode(1);
     //TODO: remove;
     game_state = true;
 
-    ball.setPosition(display.middleX(), display.middleY());
-    ball.setStartingDirection();
+//     ball.setPosition(display.middleX(), display.middleY());
+//     ball.setStartingDirection();
     //CurrentState = Play;  //Need to be added in main - overleg met PIOTR.
 }
 
 void Plong::iterate(){
-    if(!game_state){ return; }
 
     ball.move();
     int paddle_scored = ball.bounce(display, paddle);

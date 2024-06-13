@@ -16,16 +16,16 @@ void setup() {
     Serial.begin(9600);
     randomSeed(analogRead(A0));
 
+
     pinMode(paddle.pin_1, INPUT);
     pinMode(paddle.pin_2, INPUT);
-
     plong.Start();
 }
 
 void loop() {
-
+    plong.Start();
+    // plong.display.debug();
     plong.iterate();
-    // plong.consoleVisualisation();
 
 //   switch(CurrentState)
 //   {
@@ -43,5 +43,4 @@ void loop() {
 //       break;
 //   }
 //     delay(20);
-
 }
