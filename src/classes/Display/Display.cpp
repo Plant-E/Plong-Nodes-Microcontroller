@@ -35,37 +35,41 @@ void Display::visualiseBall(int pos_x, int pos_y){
     for(int y = 0; y < res_y; y++){
         for(int x = 0; x < res_x; x++){
             
-            int led;
-            if (y % 2 == 0) {
-                led = y * res_x + x;
-            } else {
-                led = y * res_x + (res_x - 1 - x);
-            }
-
             float distance = sqrt(pow((x * 100 + 50) - pos_x, 2) + pow((y * 100 + 50) - pos_y, 2));
 
             if(distance > visualisation_distance){
-                leds[led] = CRGB::Black;
+                setLed(x, y, CRGB::Black);
             }
             else{
                 int brightness = static_cast<int>(max_brightness * (1 - (distance / visualisation_distance)));
-                leds[led] = CRGB(brightness, 0, 0);
+                setLed(x, y, CRGB(brightness, 0, 0));
             }
-
-            // Serial.print("Distance: LED(x");
-            // Serial.print((x * 100 + 50));
-            // Serial.print(", ");
-            // Serial.print((y * 100 + 50));
-            // Serial.print(") to BALL(");
-            // Serial.print(pos_x);
-            // Serial.print(", ");
-            // Serial.print(pos_y);
-            // Serial.print(") is ");
-            // Serial.println(distance);
 
         }
     }
 
+}
+void Display::visualizePaddle(int x_1, int x_2, int width){
+
+    for(int x = x_1 - width; x <= x_1 + width; x++){
+        setLed(x, 0, CRGB(0, 100, 100));
+    }
+    for(int x = x_2 - width; x <= x_2 + width; x++){
+        setLed(x, res_y - 1, CRGB(0, 100, 100));
+    }
+
+}
+void Display::setLed(int x, int y, CRGB color){
+    int led;
+    if (y % 2 == 0) {
+        led = y * res_x + x;
+    } else {
+        led = y * res_x + (res_x - 1 - x);
+    }
+
+    leds[led] = color;
+}
+void Display::displayLeds(){
     FastLED.show();
 }
 
