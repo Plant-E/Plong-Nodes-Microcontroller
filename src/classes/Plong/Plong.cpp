@@ -1,12 +1,19 @@
 #include <Arduino.h>
 #include "Plong.h"
 
-Plong::Plong(Display& display_instance, Ball& ball_instance) : display(display_instance), ball(ball_instance){
+Plong::Plong(Display& display_instance, Ball& ball_instance, Paddle& paddle_instnace) 
+    : display(display_instance), ball(ball_instance), paddle(paddle_instnace){
+
     game_state = false;
+
+    paddle.setResolutionWidth(display.res_x);
 }
 
 void Plong::Start()
 {
+    //TODO: remove;
+    game_state = true;
+
     ball.setPosition(display.middleX(), display.middleY());
     ball.setStartingDirection();
     //CurrentState = Play;  //Need to be added in main - overleg met PIOTR.
@@ -22,7 +29,13 @@ void Plong::iterate(){
 }
 
 void Plong::visualise(){
+    
+    //Set led stated of each component
     display.visualiseBall(ball.pos_x, ball.pos_y);
+    display.visualizePaddle(paddle.getPosX1(), 5, paddle.width);
+
+    //Display the leds
+    display.displayLeds();
 }
 
 void Plong::consoleVisualisation(){
