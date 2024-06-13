@@ -9,7 +9,7 @@ States CurrentState = BootMode;
 
 Display display(10, 6, 90, 250); //x, y, visualization_distance, max_brightness
 Ball ball(2); // Speed
-Paddle paddle(34, 35, 1, 4095); //Pin 1, Pin 2, Paddle width ( padding on 1 side ), pot upper range
+Paddle paddle(34, 35, 1); //Pin 1, Pin 2, Paddle width ( padding per side )
 Plong plong(display, ball, paddle);
 
 void setup() {
@@ -24,24 +24,24 @@ void setup() {
 
 void loop() {
 
-    // plong.iterate();
+    plong.iterate();
     // plong.consoleVisualisation();
 
-  switch(CurrentState)
-  {
-    case BootMode:
-      plong.Booting();
-      break;
-    case Start:
-      plong.Start();
-      break;
-    case Play:
-      plong.iterate();
-      break;
-    case Game_Over:
-      plong.Game_Over();
-      break;
-  }
-    delay(20);
+//   switch(CurrentState)
+//   {
+//     case BootMode:
+//       plong.Booting();
+//       break;
+//     case Start:
+//       plong.Start();
+//       break;
+//     case Play:
+//       plong.iterate();
+//       break;
+//     case Game_Over:
+//       plong.Game_Over();
+//       break;
+//   }
+//     delay(20);
 
 }

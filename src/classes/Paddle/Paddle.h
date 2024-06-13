@@ -14,7 +14,7 @@ public:
 
     int res_width;
 
-    Paddle(int paddle_1_pin, int paddle_2_pin, int width, int pot_limit);
+    Paddle(int paddle_1_pin, int paddle_2_pin, int width);
     
     void setResolutionWidth(int res_x);
 

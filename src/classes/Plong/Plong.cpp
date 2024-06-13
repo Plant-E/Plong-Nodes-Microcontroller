@@ -32,7 +32,7 @@ void Plong::visualise(){
     
     //Set led stated of each component
     display.visualiseBall(ball.pos_x, ball.pos_y);
-    display.visualizePaddle(paddle.getPosX1(), 5, paddle.width);
+    display.visualizePaddle(paddle.getPosX1(), paddle.getPosX2(), paddle.width);
 
     //Display the leds
     display.displayLeds();

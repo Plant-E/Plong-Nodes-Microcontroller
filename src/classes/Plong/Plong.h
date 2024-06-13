@@ -11,7 +11,6 @@ public:
 
     bool game_state;
 
-
     Display& display;
     Ball& ball;
     Paddle& paddle;
