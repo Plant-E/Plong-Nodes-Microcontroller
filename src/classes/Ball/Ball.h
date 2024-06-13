@@ -1,6 +1,10 @@
 #ifndef BALL_H
 #define BALL_H
 
+#include "../Display/Display.h"
+#include "../Paddle/Paddle.h"
+
+
 class Ball {
 public:
     
@@ -14,7 +18,7 @@ public:
     Ball(int speed);
 
     void move();
-    void bounce(int full_res_x, int full_res_y);
+    int bounce(Display& display, Paddle& paddle);
 
     void setPosition(int x, int y);
     void setDirection(int direction);

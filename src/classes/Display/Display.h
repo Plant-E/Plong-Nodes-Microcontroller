@@ -1,6 +1,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include <FastLED.h>
+
 class Display {
 public:
     int res_x;
@@ -19,9 +21,14 @@ public:
 
     void visualiseBall(int int_x, int pos_y);
 
+    void visualizePaddle(int x_1, int x_2, int width);
+    
+    void setLed(int x, int y, CRGB color);
+    void displayLeds();
+
+    void Animation_Score();
     void Animation_Players();
     void Animation_Score(int Player_1_Score, int Player_2_Score);
-
     void Animation_Game_Over_Mode(int Winner);
     
     void debug();

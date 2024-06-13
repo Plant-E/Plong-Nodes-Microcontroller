@@ -14,27 +14,31 @@ void Ball::move(){
     pos_x += round(delta_x);
     pos_y += round(delta_y);
 }
-void Ball::bounce(int full_res_x, int full_res_y){
-    if(pos_y >= full_res_y){ //Bottom
+int Ball::bounce(Display& display, Paddle& paddle){
+    if(pos_y <= 0){ // Top, Paddle 1
+        if(pos_x < (paddle.getPosX1() - paddle.width) * 100 || pos_x > (paddle.getPosX1() + paddle.width + 1) * 100){ return 2; } //Paddle 2 scores
+
         direction = 360 - direction;
-        pos_y = full_res_y;
+        pos_y = 100;
     }
-    else if(pos_y <= 0){ //Top
+    else if(pos_y >= display.fullResY()){ // Bottom, Paddle 2
+        if(pos_x < (paddle.getPosX2() - paddle.width) * 100 || pos_x > (paddle.getPosX2() + paddle.width + 1) * 100){ return 1; }
+
         direction = 360 - direction;
-        pos_y = 0;
+        pos_y = display.fullResY();
     }
-    else if(pos_x <= 0){ //Left
-        // TODO: Check for paddle
+    else if(pos_x <= 0){ // Left
         direction = 180 - direction;
         if(direction < 0){ direction += 360; };
         pos_x = 0;
     }
-    else if(pos_x >= full_res_x){ // Right
-        // TODO: Check for paddle
+    else if(pos_x >= display.fullResX()){ // Right
         direction = 180 - direction;
         if(direction < 0){  direction += 360; };
-        pos_x = full_res_x;
+        pos_x = display.fullResX();
     }
+
+    return 0;
 }
 
 void Ball::setPosition(int x, int y){
