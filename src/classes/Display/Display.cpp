@@ -75,229 +75,130 @@ void Display::setLed(int x, int y, CRGB color){
 void Display::displayLeds(){
     FastLED.show();
 }
-
-
-void Display::Animation_Players()
+void Display::setArray()
 {
-    Clear_Screen();
-    for(unsigned int j = 0; j<NUM_LEDS;j++)
-    {
-        for(unsigned int i = 0; i<sizeof(Players_Array)/sizeof(Players_Array[0]); i++)
-        {
-            if(j == Players_Array[i])
-            {
-                Serial.println(i);
-                leds[j] = CRGB::Yellow;
-            }
-        }
-    }
-    FastLED.show();
 
 }
-
-void Display::Animation_Score(int Player_1_Score, int Player_2_Score)
+void Display::Animation_Players()
 {
-    Clear_Screen();
+    Make_Screen_Background(CRGB::Blue);
+    for(unsigned i = 0; i < sizeof(Players_Array)/sizeof(Players_Array[0]); i++)
+    {
+        leds[Players_Array[i]] = CRGB::Yellow;
+    }
+    FastLED.show();
+}
+int Display::Animation_Score(int Player_1_Score, int Player_2_Score)
+{
+    Make_Screen_Background(CRGB::Purple);
+    
+    if(Player_1_Score == 3)
+    {
+        Animation_Game_Over_Mode(1);
+        return 2;
+    }
+    if(Player_2_Score == 3)
+    {
+        Animation_Game_Over_Mode(2);
+        return 2;
+    }
+
     if(Player_1_Score == 0)
     {
-        for(unsigned int j = 0; j<NUM_LEDS;j++)
-        {
-            for(unsigned int i = 0; i < sizeof(Player_1_Zero)/sizeof(Player_1_Zero[0]); i++)
-            {
-                if(j == Player_1_Zero[i])
-                {
-                    leds[j] = CRGB::Yellow;
-                }
 
-            }
+        for(unsigned int i = 0; i < sizeof(Player_1_Zero)/sizeof(Player_1_Zero[0]); i++)
+        {
+            leds[Player_1_Zero[i]] = CRGB::Yellow;
         }
+
     }
     else if(Player_1_Score == 1)
     {
-        for(unsigned int j = 0; j<NUM_LEDS;j++)
+        for(unsigned int i = 0; i< sizeof(Player_1_One)/sizeof(Player_1_One[0]); i++)
         {
-            for(unsigned int i = 0; i< sizeof(Player_1_One)/sizeof(Player_1_One[0]); i++)
-            {
-                if(j == Player_1_One[i])
-                {
-                    leds[j] = CRGB::Yellow;
-                }
-
-            }
+            leds[Player_1_One[i]] = CRGB::Yellow;
         }
     }
     else if(Player_1_Score == 2)
     {
-        for(unsigned int j = 0; j<NUM_LEDS;j++)
+        for(unsigned int i = 0; i< sizeof(Player_1_Two)/sizeof(Player_1_Two[0]); i++)
         {
-            for(unsigned int i = 0; i< sizeof(Player_1_Two)/sizeof(Player_1_Two[0]); i++)
-            {
-                if(j == Player_1_Two[i])
-                {
-                    leds[j] = CRGB::Blue;
-                }
-
-            }
+            leds[Player_1_Two[i]] = CRGB::Blue;
         }
     }
-
-
-
 
 //player 2
     if(Player_2_Score == 0)
     {
-        for(unsigned int j = 0; j<NUM_LEDS;j++)
+        for(unsigned int i = 0; i< sizeof(Player_2_Zero)/sizeof(Player_2_Zero[0]); i++)
         {
-            for(unsigned int i = 0; i< sizeof(Player_2_Zero)/sizeof(Player_2_Zero[0]); i++)
-            {
-                if(j == Player_2_Zero[i])
-                {
-                    leds[j] = CRGB::Yellow;
-                }
-
-            }
+            leds[Player_2_Zero[i]] = CRGB::Yellow;
         }
     }
     else if(Player_2_Score == 1)
     {
-        for(unsigned int j = 0; j<NUM_LEDS;j++)
+        for(unsigned int i = 0; i< sizeof(Player_2_One)/sizeof(Player_2_One[0]); i++)
         {
-            for(unsigned int i = 0; i< sizeof(Player_2_One)/sizeof(Player_2_One[0]); i++)
-            {
-                if(j == Player_2_One[i])
-                {
-                    leds[j] = CRGB::Yellow;
-                }
-
-            }
+            leds[Player_2_One[i]] = CRGB::Yellow;
         }
     }
     else if(Player_2_Score == 2)
     {
-        for(unsigned int j = 0; j<NUM_LEDS;j++)
+        for(unsigned int i = 0; i< sizeof(Player_2_Two)/sizeof(Player_2_Two[0]); i++)
         {
-            for(unsigned int i = 0; i< sizeof(Player_2_Two)/sizeof(Player_2_Two[0]); i++)
-            {
-                if(j == Player_2_Two[i])
-                {
-                    leds[j] = CRGB::Blue;
-                }
-
-            }
+            leds[Player_2_Two[i]] = CRGB::Blue;
         }
     }
     FastLED.show();
+    return 1;
 }
-
 void Display::Animation_Game_Over_Mode(int Winner)
 {
-    unsigned long Animation_Game_Over_Millis;
+    unsigned long Animation_Game_Over_Millis = millis();
     static int Game_Over_Loop = 5000;
-    static uint8_t colorIndex = 0;
 
-    Serial.print("millis: ");
-    Serial.println(millis());
-    Serial.print("Animation_Game_Over_Millis: ");
-    Serial.println(Animation_Game_Over_Millis);
-    if(Winner == 1)
+    while(millis() - Animation_Game_Over_Millis <= Game_Over_Loop)
     {
-        Clear_Screen();
-        while(millis() - Animation_Game_Over_Millis <= Game_Over_Loop)
-        {
+        static uint8_t startIndex = 0;
+        startIndex = startIndex + 1; /* motion speed */
+        int Winner_Crown_array_size = sizeof(Winner_Crown) / sizeof(Winner_Crown[0]);
+        Rainbowcolor_Background_And_Winner_Animations(startIndex, Winner_Crown,Winner_Crown_array_size);
 
-            colorIndex = colorIndex + 1;
-            for(unsigned int j = 0; j < NUM_LEDS; ++j)
-            {
-                for(unsigned int i = 0; i< sizeof(Player_1_Three)/sizeof(Player_1_Three[0]); i++) 
-                {
-                    if(j == Player_1_Three[i])
-                    {
-                        leds[j] = CRGB::Black; 
-                        Serial.print("Black: ");
-                        Serial.println(i);
-                    }
-                    else
-                    {
-                        leds[j] = ColorFromPalette(currentPalette, colorIndex, 64, currentBlending);
-                        Serial.print("Color: ");
-                        Serial.println(j);
-                        colorIndex += 3;
-                    }
-                }
-            }
-            FastLED.show();
-            FastLED.delay(10);
-        }
-
-
-        delay(2000);
-
-        for(unsigned int j = 0; j < NUM_LEDS; ++j)
-        {
-            for(unsigned int i = 0; i< sizeof(Winner_Player)/sizeof(Winner_Player[0]); i++) 
-            {
-                if(j == Winner_Player[i])
-                {
-                    leds[j] = CRGB::Black;                        
-                }
-                else
-                {
-                    leds[j] = ColorFromPalette( RainbowColors_p, 0, 255, LINEARBLEND);
-                }
-            }
-        }
-
-        // CurrentState = Bootingmode
-    }
-
-    else if(Winner == 2)
-    {
-        Clear_Screen();
-        for(unsigned int j = 0; j < NUM_LEDS; ++j)
-        {
-            for(unsigned int i = 0; i< sizeof(Player_1_Three)/sizeof(Player_1_Three[0]); i++) 
-            {
-                if(j == Player_1_Three[i])
-                {
-                    leds[j] = CRGB::Black;                        
-                }
-                else
-                {
-                    leds[i] = ColorFromPalette( RainbowColors_p, 0, 255, LINEARBLEND);
-                }
-            }
-        }
-
-        delay(2000);
-
-        for(unsigned int j = 0; j < NUM_LEDS; ++j)
-        {
-            for(unsigned int i = 0; i< sizeof(Winner_Player)/sizeof(Winner_Player[0]); i++) 
-            {
-                if(j == Winner_Player[i])
-                {
-                    leds[j] = CRGB::Black;                        
-                }
-                else
-                {
-                    leds[i] = ColorFromPalette( RainbowColors_p, 0, 255, LINEARBLEND);
-                }
-            }
-        }
-        // CurrentState = Bootingmode
+        delay(1000);
+        int Winner_Player_1_array_size = sizeof(Winner_Player_1) / sizeof(Winner_Player_1[0]);
+        int Winner_Player_2_array_size = sizeof(Winner_Player_2) / sizeof(Winner_Player_2[0]);
+        if(Winner == 1){Rainbowcolor_Background_And_Winner_Animations(startIndex, Winner_Player_1, Winner_Player_1_array_size);}
+        if(Winner == 2){Rainbowcolor_Background_And_Winner_Animations(startIndex, Winner_Player_2, Winner_Player_2_array_size);}
+        delay(1000);
     }
 }
-
-void Display::Clear_Screen()
+void Display::Make_Screen_Background(CRGB color)
 {
     for(unsigned int j = 0; j < NUM_LEDS;j++)
     {
-        leds[j] = CRGB(0,0,0);
+        leds[j] = color;
     }
     FastLED.show();
 }
+void Display::Rainbowcolor_Background_And_Winner_Animations(uint8_t colorIndex, unsigned int show_array[], int show_array_size) 
+{
+    uint8_t brightness = 64;
+    
+    for (int i = 0; i < NUM_LEDS; ++i) 
+    {
+        leds[i] = ColorFromPalette(currentPalette, colorIndex, brightness, currentBlending);
+        colorIndex += 3;
+    }
+    FastLED.show();
+    for (int j = 0; j < show_array_size; j++) 
+    {
+        Serial.println(j);
+        leds[show_array[j]] = CRGB::Black;
+    }
 
+    FastLED.show();
+    FastLED.delay(10);
+}
 
 void Display::debug(){
     Serial.print("X:");

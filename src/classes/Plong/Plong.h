@@ -16,15 +16,18 @@ public:
     Paddle& paddle;
 
     Plong(Display& display, Ball& ball, Paddle& paddle);
-    
-    void iterate();
-    void Booting();
-    void Start();
-    void Game_Over();
+    void Setup();
+    int Booting();
+    int Start();
+    int PlayMode();
     void visualise();
 
     void consoleVisualisation();
 
-};
 
+private:
+
+    int Score_Player_1;
+    int Score_Player_2;
+};
 #endif
