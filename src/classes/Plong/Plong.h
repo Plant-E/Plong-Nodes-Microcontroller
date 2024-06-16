@@ -17,10 +17,9 @@ public:
 
     Plong(Display& display, Ball& ball, Paddle& paddle);
     void Setup();
-    void iterate();
     int Booting();
     int Start();
-    void Game_Over();
+    int PlayMode();
     void visualise();
 
     void consoleVisualisation();

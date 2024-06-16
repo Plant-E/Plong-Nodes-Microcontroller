@@ -31,7 +31,7 @@ int Plong::Start()
     return returning_integer;
 }
 
-void Plong::iterate(){
+int Plong::PlayMode(){
 
     ball.move();
     int paddle_scored = ball.bounce(display, paddle);

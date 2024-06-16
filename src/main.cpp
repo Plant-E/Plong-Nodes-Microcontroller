@@ -31,7 +31,7 @@ void loop() {
       if(plong.Start() == 2){CurrentState = BootMode;} // when the player hits the 3 points it shows the winner and goes back to the BootMode
       break;
     case Play: // when it scores it goes back to the start to show the player and the score
-      plong.iterate();
+      if(plong.PlayMode() == 1){CurrentState = Start;}
       break;
   }
     delay(20);
