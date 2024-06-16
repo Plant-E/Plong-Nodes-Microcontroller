@@ -8,17 +8,27 @@ Plong::Plong(Display& display_instance, Ball& ball_instance, Paddle& paddle_inst
 
     paddle.setResolutionWidth(display.res_x);
 }
+void Plong::Setup()
+{
+    ball.setPosition(display.middleX(), display.middleY());
+    ball.setStartingDirection();
+    game_state = true;
+}
 
-void Plong::Start()
+int Plong::Booting()
 {
 
-    display.Animation_Game_Over_Mode(1);
-    //TODO: remove;
-    game_state = true;
+}
+int Plong::Start()
+{
+    int returning_integer = 1;
 
-//     ball.setPosition(display.middleX(), display.middleY());
-//     ball.setStartingDirection();
-    //CurrentState = Play;  //Need to be added in main - overleg met PIOTR.
+    display.Animation_Players();
+    delay(2000);
+    if(display.Animation_Score(Score_Player_1, Score_Player_2) == 2){returning_integer = 2;};
+    delay(2000);
+
+    return returning_integer;
 }
 
 void Plong::iterate(){
