@@ -64,6 +64,7 @@ void Display::visualizePaddle(int x_1, int x_2, int width){
 
 }
 void Display::setLed(int x, int y, CRGB color){
+    //there we had two different wiring configurations so the coordinates needed to get calculated different
     int led;
     // if (y % 2 == 0) {
     led = y * res_x + x;
