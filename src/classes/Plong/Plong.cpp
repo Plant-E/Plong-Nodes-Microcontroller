@@ -12,19 +12,15 @@ void Plong::Setup()
     ball.setStartingDirection();
 }
 
-int Plong::Booting()
+int Plong::Booting()//Sends code back need to figure out how the heartbeat is gonna fixed.
 {
-    // Serial.print("BootingMode");
     // Serial.println(heartbeat.GetHeartbeatSensor_1());
     // Serial.println(heartbeat.GetHeartbeatSensor_2());
-    delay(500);
-    Serial.println("hello");
     return 1;
 }
 
 int Plong::Start()
 {
-    Serial.println("Hello");
     int returning_integer = 1;
     Setup();
     display.Animation_Players();
