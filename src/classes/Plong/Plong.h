@@ -5,6 +5,7 @@
 #include "../Display/Display.h"
 #include "../Ball/Ball.h"
 #include "../Paddle/Paddle.h"
+#include "../Heartbeat/Heartbeat.h"
 
 class Plong {
 public:
@@ -14,8 +15,9 @@ public:
     Display& display;
     Ball& ball;
     Paddle& paddle;
+    Heartbeat& heartbeat;
 
-    Plong(Display& display, Ball& ball, Paddle& paddle);
+    Plong(Display& display, Ball& ball, Paddle& paddle, Heartbeat& heartbeat);
     void Setup();
     int Booting();
     int Start();
