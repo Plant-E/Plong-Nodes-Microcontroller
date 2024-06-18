@@ -14,7 +14,9 @@ void Ball::move(){
     pos_x += round(delta_x);
     pos_y += round(delta_y);
 }
-int Ball::bounce(Display& display, Paddle& paddle){
+int Ball::
+ 
+ bounce(Display& display, Paddle& paddle){
     if(pos_y <= 0){ // Top, Paddle 1
         if(pos_x < (paddle.getPosX1() - paddle.width) * 100 || pos_x > (paddle.getPosX1() + paddle.width + 1) * 100){ return 2; } //Paddle 2 scores
 

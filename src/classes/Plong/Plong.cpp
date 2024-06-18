@@ -1,10 +1,8 @@
 #include <Arduino.h>
 #include "Plong.h"
 
-Plong::Plong(Display& display_instance, Ball& ball_instance, Paddle& paddle_instnace) 
-    : display(display_instance), ball(ball_instance), paddle(paddle_instnace){
-
-    game_state = false;
+Plong::Plong(Display& display_instance, Ball& ball_instance, Paddle& paddle_instnace, Heartbeat& heartbeat_instance) 
+    : display(display_instance), ball(ball_instance), paddle(paddle_instnace), heartbeat(heartbeat_instance){
 
     paddle.setResolutionWidth(display.res_x);
 }
@@ -12,42 +10,55 @@ void Plong::Setup()
 {
     ball.setPosition(display.middleX(), display.middleY());
     ball.setStartingDirection();
-    game_state = true;
 }
 
 int Plong::Booting()
 {
-
+    // Serial.print("BootingMode");
+    // Serial.println(heartbeat.GetHeartbeatSensor_1());
+    // Serial.println(heartbeat.GetHeartbeatSensor_2());
+    delay(500);
+    Serial.println("hello");
+    return 1;
 }
+
 int Plong::Start()
 {
+    Serial.println("Hello");
     int returning_integer = 1;
-
+    Setup();
     display.Animation_Players();
     delay(2000);
-    if(display.Animation_Score(Score_Player_1, Score_Player_2) == 2){returning_integer = 2;};
-    delay(2000);
+    if(display.Animation_Score(Score_Player_1, Score_Player_2) == 2)
+    {
+        Score_Player_1 = 0;
+        Score_Player_2 = 0;
+        returning_integer = 2;
+    };
+    delay(1000);
 
     return returning_integer;
 }
 
 int Plong::PlayMode(){
-
     ball.move();
     int paddle_scored = ball.bounce(display, paddle);
-
-    //0 = Bounced, 1 = P1 scored, 2 = p2 scored
-    if(paddle_scored){
-
-        //TODO: Implement game state & score
-        Start();
-    }
-
     visualise();
+    // //0 = Bounced, 1 = P1 scored, 2 = p2 scored
+    if(paddle_scored == 1)
+    {
+        Score_Player_1 += 1;
+        return 1;
+    }
+    if(paddle_scored == 2)
+    {
+        Score_Player_2 += 1;
+        return 1;
+    }
+    return 0;
 }
 
 void Plong::visualise(){
-    
     //Set led stated of each component
     display.visualiseBall(ball.pos_x, ball.pos_y);
     display.visualizePaddle(paddle.getPosX1(), paddle.getPosX2(), paddle.width);
